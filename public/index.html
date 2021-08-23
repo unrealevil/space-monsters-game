@@ -4,9 +4,34 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>PIXI DEMO</title>
-    <style>* {padding: 0; margin: 0}</style>
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        html,
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            background-color: black;
+            color: white;
+            display: flex;
+            justify-content:center;
+            align-items:center;
+        }
+
+        #loading {
+            font-size: 2em;
+        }
+    </style>
 </head>
-<body style="background-color: black; color: white; display: flex;justify-content:center;align-items:center;">
-<h2 id="loading">Loading</h2>
+<body>
+<div id="loading">Loading...</div>
 </body>
 </html>
