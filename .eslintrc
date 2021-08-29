@@ -10,6 +10,8 @@
   "rules": {
     "max-len": ["warn", { "code": 120 }],
     "no-param-reassign": ["error", { "props": false }],
+    "@typescript-eslint/no-unused-expressions": ["error", { "allowShortCircuit": true, "allowTernary": true }],
+    "unicorn/number-literal-case": "off",
     "unicorn/prevent-abbreviations": [
       "error",
       {

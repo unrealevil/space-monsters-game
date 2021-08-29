@@ -11,6 +11,7 @@ Application.registerPlugin(AppLoaderPlugin);
 
 export const createApplication = (parent: HTMLElement) => {
   const app = new Application({
+    antialias: true,
     resizeTo: parent,
     //resolution: window.devicePixelRatio
   });

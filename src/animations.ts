@@ -35,7 +35,13 @@ export const animateRotation = (
   return newAngle;
 };
 
-export const moveByAngle = ([x, y]: Point, toPoint: Point, angle: number, speed: number, timeDelta: number): Point => {
+export const moveByAngleToPoint = (
+  [x, y]: Point,
+  toPoint: Point,
+  angle: number,
+  speed: number,
+  timeDelta: number,
+): Point => {
   if ([x, y] === toPoint) {
     return toPoint;
   }
@@ -44,6 +50,15 @@ export const moveByAngle = ([x, y]: Point, toPoint: Point, angle: number, speed:
   if (dist < step) {
     return toPoint;
   }
+
+  const newX = x + step * Math.cos(angle);
+  const newY = y + step * Math.sin(angle);
+
+  return [newX, newY];
+};
+
+export const moveByAngle = ([x, y]: Point, angle: number, speed: number, timeDelta: number) => {
+  const step = speed * SPEED_MOD * timeDelta;
   const newX = x + step * Math.cos(angle);
   const newY = y + step * Math.sin(angle);
 
