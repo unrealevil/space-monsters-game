@@ -21,7 +21,7 @@ export class Jet extends AnimatedSprite {
         this.animationSpeed = Math.abs(this.animationSpeed);
         this.play();
       }
-    } else {
+    } else if (this.currentFrame !== 9 && this.currentFrame !== 21) {
       this.animationSpeed = Math.abs(this.animationSpeed) * direction;
       this.play();
     }
@@ -35,7 +35,6 @@ export class Jet extends AnimatedSprite {
     this.position.set(x, y);
   }
 
-  // noinspection JSUnusedGlobalSymbols
   onFrameChange = (currentNumber: number) => {
     const { rotateDirection } = this;
 
