@@ -5,11 +5,11 @@ import { Runner } from '@pixi/runner';
 export const onSetDestinationPoint = new Runner('setDestinationPoint');
 export const onSetAttackPoint = new Runner('setAttackPoint');
 
-const click = ({ data }: InteractionEvent) => {
+const doubleClick = ({ data }: InteractionEvent) => {
   onSetDestinationPoint.emit([data.global.x, data.global.y]);
 };
 
-const doubleClick = ({ data }: InteractionEvent) => {
+const click = ({ data }: InteractionEvent) => {
   onSetAttackPoint.emit([data.global.x, data.global.y]);
 };
 
