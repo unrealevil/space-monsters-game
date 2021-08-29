@@ -28,6 +28,6 @@ export const createJetControl = (target: DisplayObject) => {
         click(event);
       }
       clickCount = 0;
-    }, 150);
+    }, 200);
   });
 };
