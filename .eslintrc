@@ -8,6 +8,7 @@
   ],
   "parser": "@typescript-eslint/parser",
   "rules": {
+    "yoda": "off",
     "max-len": ["warn", { "code": 120 }],
     "no-param-reassign": ["error", { "props": false }],
     "@typescript-eslint/no-unused-expressions": ["error", { "allowShortCircuit": true, "allowTernary": true }],

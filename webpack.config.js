@@ -47,6 +47,14 @@ module.exports = {
             }
           }
         ]
+      },
+      {
+        test: /\.mp3$/,
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]',
+          outputPath: 'assets/sounds',
+        }
       }
     ]
   },

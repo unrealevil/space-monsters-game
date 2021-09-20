@@ -1,4 +1,4 @@
-import { DisplayObject } from 'pixi.js';
+import { DisplayObject } from '@pixi/display';
 import { InteractionEvent } from '@pixi/interaction';
 import { Runner } from '@pixi/runner';
 
@@ -6,11 +6,11 @@ export const onSetDestinationPoint = new Runner('setDestinationPoint');
 export const onSetAttackPoint = new Runner('setAttackPoint');
 
 const doubleClick = ({ data }: InteractionEvent) => {
-  onSetDestinationPoint.emit([data.global.x, data.global.y]);
+  onSetAttackPoint.emit([data.global.x, data.global.y]);
 };
 
 const click = ({ data }: InteractionEvent) => {
-  onSetAttackPoint.emit([data.global.x, data.global.y]);
+  onSetDestinationPoint.emit([data.global.x, data.global.y]);
 };
 
 export const createJetControl = (target: DisplayObject) => {

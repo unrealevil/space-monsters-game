@@ -1,4 +1,4 @@
-import { DisplayObject } from 'pixi.js';
+import { DisplayObject } from '@pixi/display';
 import { Point, RotateDirection } from '../engine';
 
 export const calculateDistance = ([x1, y1]: Point, [x2, y2]: Point) => {
@@ -34,16 +34,14 @@ export const findOptimalRotateDirection = (fromAngle: number, toAngle: number): 
   return Math.sign(from - to);
 };
 
-export const objectHit = (object1: DisplayObject, object2: DisplayObject) => {
+export const objectHit = (object1: DisplayObject, object2: DisplayObject, accuracity = 1) => {
   const bounds1 = object1.getBounds();
   const bounds2 = object2.getBounds();
 
-  //console.log(bounds1, bounds1);
-
   return (
-    bounds1.x < bounds2.x + bounds2.width &&
-    bounds1.x + bounds1.width > bounds2.x &&
-    bounds1.y < bounds2.y + bounds2.height &&
-    bounds1.y + bounds1.height > bounds2.y
+    bounds1.x < bounds2.x + bounds2.width * accuracity &&
+    bounds1.x + bounds1.width * accuracity > bounds2.x &&
+    bounds1.y < bounds2.y + bounds2.height * accuracity &&
+    bounds1.y + bounds1.height * accuracity > bounds2.y
   );
 };
