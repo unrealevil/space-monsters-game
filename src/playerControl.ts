@@ -13,7 +13,7 @@ const click = ({ data }: InteractionEvent) => {
   onSetDestinationPoint.emit([data.global.x, data.global.y]);
 };
 
-export const createJetControl = (target: DisplayObject) => {
+export const createPlayerControl = (target: DisplayObject) => {
   target.interactive = true;
   let clickCount = 0;
   target.on('pointerup', (event: InteractionEvent) => {

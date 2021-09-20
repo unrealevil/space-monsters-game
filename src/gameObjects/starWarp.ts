@@ -1,3 +1,6 @@
+/**
+ * https://pixijs.io/examples/#/demos-advanced/star-warp.js
+ */
 import { Sprite } from '@pixi/sprite';
 import { Application } from '@pixi/app';
 
@@ -47,10 +50,6 @@ export const createStarWrap = (app: Application) => {
     app.stage.addChild(star.sprite);
     stars.push(star);
   }
-
-  // setInterval(() => {
-  //   warpSpeed = warpSpeed > 0 ? 0 : 1;
-  // }, 5000);
 
   app.ticker.add((delta) => {
     // Simple easing. This should be changed to proper easing function when used for real.

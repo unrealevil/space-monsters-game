@@ -13,7 +13,5 @@ export const createExplosion = (width: number, height: number) => {
     }
   };
   explosion.play();
-
-  //explosion.gotoAndPlay(Math.random() * 27);
   return explosion;
 };

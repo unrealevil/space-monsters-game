@@ -5,7 +5,7 @@ const HapiInert = require('@hapi/inert');
 
 const port = process.env.PORT || 3000;
 
-const FILES = /\.(js|js.map|woff|woff2|svg|bmp|jpg|jpeg|gif|png|ico)(\?v=\d+\.\d+\.\d+)?$/;
+const FILES = /\.(js|js.map|woff|woff2|svg|bmp|jpg|jpeg|gif|png|ico|mp3)(\?v=\d+\.\d+\.\d+)?$/;
 
 const PATH = {
   '/': 'index.html',

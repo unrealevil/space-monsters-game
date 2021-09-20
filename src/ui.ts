@@ -22,6 +22,24 @@ export const createHeader = (text: string) => {
   return new Text(text, style);
 };
 
+export const createScoreText = (text: string, fontSize = 20) => {
+  const style = new TextStyle({
+    fontFamily: 'Arial',
+    fontSize,
+    letterSpacing: 2,
+    fontWeight: 'bold',
+    fill: ['#ffffff', '#efca1c'], // gradient
+    stroke: '#4a1850',
+    strokeThickness: fontSize > 28 ? 8 : 5,
+    dropShadow: false,
+    dropShadowColor: '#dff3fd',
+    dropShadowBlur: 1,
+    dropShadowAngle: Math.PI,
+    dropShadowDistance: 10,
+  });
+  return new Text(text, style);
+};
+
 export const createText = (text: string) => {
   const style = new TextStyle({
     fontFamily: 'Arial',
@@ -32,6 +50,16 @@ export const createText = (text: string) => {
     wordWrap: true,
     wordWrapWidth: 440,
     lineJoin: 'round',
+  });
+
+  return new Text(text, style);
+};
+
+export const createSimpleText = (text: string) => {
+  const style = new TextStyle({
+    fontFamily: 'Monospace',
+    fontSize: 14,
+    fill: '#ffffff',
   });
 
   return new Text(text, style);

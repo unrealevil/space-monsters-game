@@ -13,7 +13,10 @@ import jetExplosionSound from './assets/sounds/jet-explosion.mp3';
 import star from './assets/sprites/star.png';
 import explosionImg from './assets/sprites/mc.png';
 import explosionData from './assets/sprites/mc.json';
+import pixiImg from './assets/pixi.png';
+import gitHubImg from './assets/GitHub-Mark-Light-64px.png';
 
+// noinspection JSUnusedGlobalSymbols
 export enum Monster {
   'EggHead' = 'eggHead.png',
   'FlowerTop' = 'flowerTop.png',
@@ -36,7 +39,8 @@ export const loadResources = (loader: Loader, onLoad: () => void) => {
     .add('bgMusic', bgMusic)
     .add('explode', explodeSound)
     .add('jetExplode', jetExplosionSound)
-
+    .add('pixi', pixiImg)
+    .add('github', gitHubImg)
     .load(() => {
       parseJetFrames(loader, () => parseMonsters(loader, () => parseExplosionFrames(loader, onLoad)));
     });
@@ -91,14 +95,6 @@ export const getJetFrames = (): Texture[] => {
     throw new Error('jet frames not load');
   }
   return jetFrames;
-};
-
-export const getMonster = (name: Monster) => {
-  const texture = monsters[name];
-  if (!texture) {
-    throw new Error(`Monster ${name} texture not found`);
-  }
-  return texture;
 };
 
 export const getExplosionFrames = (): Texture[] => {

@@ -1,3 +1,5 @@
+### Space Monsters
+Fun game created on [PixiJS](https://pixijs.com/)
 
 Start server
 ```

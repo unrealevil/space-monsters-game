@@ -4,7 +4,7 @@ import { Engine } from '../engine';
 const soundController = ({ app, emitter }: Engine) => {
   const bgMusic = Sound.from(app.loader.resources.bgMusic);
   bgMusic.loop = true;
-  bgMusic.volume = 0.4;
+  bgMusic.volume = 0.5;
 
   const laser = Sound.from(app.loader.resources.laser);
   const explode = Sound.from(app.loader.resources.explode);

@@ -2,7 +2,7 @@ import { animateRotation, moveByAngleToPoint } from '../animations';
 import { Engine, Point, RotateDirection } from '../engine';
 import { createJet } from '../gameObjects/jet';
 import { RayType } from '../gameObjects/ray';
-import { createJetControl, onSetAttackPoint, onSetDestinationPoint } from '../jetControl';
+import { createPlayerControl, onSetAttackPoint, onSetDestinationPoint } from '../playerControl';
 import { calculateDestinationAngle, findOptimalRotateDirection } from '../utils/helpers';
 
 const jetController = ({ app, emitter }: Engine) => {
@@ -67,10 +67,13 @@ const jetController = ({ app, emitter }: Engine) => {
 
   onSetAttackPoint.add({ setAttackPoint });
 
-  createJetControl(app.stage);
+  createPlayerControl(app.stage);
 
   // JET controller
   app.ticker.add((delta) => {
+    if (jet.destroyed) {
+      return;
+    }
     const anglePoint = attackPoint ?? destinationPoint;
     if (!anglePoint) {
       return;

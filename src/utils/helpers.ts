@@ -1,4 +1,5 @@
 import { DisplayObject } from '@pixi/display';
+import { Rectangle } from '@pixi/math';
 import { Point, RotateDirection } from '../engine';
 
 export const calculateDistance = ([x1, y1]: Point, [x2, y2]: Point) => {
@@ -34,14 +35,23 @@ export const findOptimalRotateDirection = (fromAngle: number, toAngle: number): 
   return Math.sign(from - to);
 };
 
+export const resizeRectangle = (rect: Rectangle, accuracity: number) => {
+  rect.x += (rect.width - rect.width * accuracity) / 2;
+  rect.width *= accuracity;
+  rect.y += (rect.height - rect.height * accuracity) / 2;
+  rect.height *= accuracity;
+
+  return rect;
+};
+
 export const objectHit = (object1: DisplayObject, object2: DisplayObject, accuracity = 1) => {
-  const bounds1 = object1.getBounds();
-  const bounds2 = object2.getBounds();
+  const bounds1 = resizeRectangle(object1.getBounds(), accuracity);
+  const bounds2 = resizeRectangle(object2.getBounds(), accuracity);
 
   return (
-    bounds1.x < bounds2.x + bounds2.width * accuracity &&
-    bounds1.x + bounds1.width * accuracity > bounds2.x &&
-    bounds1.y < bounds2.y + bounds2.height * accuracity &&
-    bounds1.y + bounds1.height * accuracity > bounds2.y
+    bounds1.x < bounds2.x + bounds2.width &&
+    bounds1.x + bounds1.width > bounds2.x &&
+    bounds1.y < bounds2.y + bounds2.height &&
+    bounds1.y + bounds1.height > bounds2.y
   );
 };

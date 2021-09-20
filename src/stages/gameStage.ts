@@ -7,10 +7,11 @@ import { createExplosion } from '../gameObjects/explosion';
 import jetController from '../controller/jetController';
 import rayController from '../controller/rayController';
 import monsterController from '../controller/monsterController';
-// eslint-disable-next-line import/no-cycle
-import { createGameOverStage } from './gameOverStage';
+import { appendScore } from '../gameObjects/score';
+import { score } from '../score';
 
-export const createGameStage = ({ app, emitter }: Engine) => {
+const gameStage = ({ app, emitter }: Engine) => {
+  score.reset();
   app.stage.removeAllListeners();
   app.stage.removeChildren();
   const bg = createBackground(app.screen.width, app.screen.height, app.loader.resources.bg.texture);
@@ -18,27 +19,29 @@ export const createGameStage = ({ app, emitter }: Engine) => {
 
   app.stage.addChild(bg);
   app.stage.addChild(explosionContainer);
+  const scoreCaption = appendScore(app);
 
   const jet = jetController({ app, emitter });
   const rays = rayController({ app, emitter });
-  const enemes = monsterController({ app, emitter });
+  const enemies = monsterController({ app, emitter });
 
   app.ticker.add(() => {
     rays.forEach((ray) => {
-      enemes.forEach((enemy, index) => {
+      enemies.forEach((enemy, index) => {
         if (objectHit(enemy.sprite, ray)) {
-          enemes.splice(index, 1);
+          enemies.splice(index, 1);
           const explosion = createExplosion(enemy.sprite.width * 3, enemy.sprite.height * 3);
           explosion.position = enemy.sprite.position;
           explosionContainer.addChild(explosion);
           enemy.sprite.destroy();
           emitter.emit('monster-explode');
+          score.add();
         }
       });
     });
 
-    enemes.forEach((enemy) => {
-      if (!jet.destroyed && objectHit(enemy.sprite, jet, 0.5)) {
+    enemies.forEach((enemy) => {
+      if (!jet.destroyed && objectHit(enemy.sprite, jet, 0.8)) {
         const { width, height, x, y } = jet;
         const jetExplode = () => {
           const explosion = createExplosion(width * 3, height * 3);
@@ -52,7 +55,10 @@ export const createGameStage = ({ app, emitter }: Engine) => {
         for (let i = 0; i < countExplosion; i++) {
           setTimeout(jetExplode, i * 120);
         }
-        setTimeout(() => createGameOverStage({ app, emitter }), countExplosion * 120);
+        setTimeout(() => {
+          scoreCaption.destroy();
+          emitter.emit('show-game-over');
+        }, countExplosion * 120);
       }
     });
   });
@@ -67,3 +73,5 @@ const createBackground = (width: number, height: number, image?: Texture) => {
   bg.height = height;
   return bg;
 };
+
+export default gameStage;
