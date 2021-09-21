@@ -8,6 +8,14 @@ import navigation from './navigation';
 const app = createApplication(document.body);
 const emitter = new EventEmitter<GameEvents>();
 
+window.addEventListener(
+  'contextmenu',
+  (error) => {
+    error.preventDefault();
+  },
+  false,
+);
+
 loadResources(app.loader, () => {
   const loading = document.querySelector<HTMLElement>('#loading');
   if (loading) {

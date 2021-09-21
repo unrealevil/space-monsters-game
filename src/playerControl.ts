@@ -30,4 +30,14 @@ export const createPlayerControl = (target: DisplayObject) => {
       clickCount = 0;
     }, 200);
   });
+
+  let allowFire = true;
+  target.on('rightclick', (event: InteractionEvent) => {
+    if (!allowFire) {
+      return;
+    }
+    doubleClick(event);
+    allowFire = false;
+    setTimeout(() => (allowFire = true), 500);
+  });
 };
