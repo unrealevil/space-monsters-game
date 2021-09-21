@@ -4,6 +4,7 @@ import { createJet } from '../gameObjects/jet';
 import { RayType } from '../gameObjects/ray';
 import { createPlayerControl, onSetAttackPoint, onSetDestinationPoint } from '../playerControl';
 import { calculateDestinationAngle, findOptimalRotateDirection } from '../utils/helpers';
+import { score } from '../score';
 
 const jetController = ({ app, emitter }: Engine) => {
   let destinationPoint: Point | null = null;
@@ -79,8 +80,15 @@ const jetController = ({ app, emitter }: Engine) => {
       return;
     }
 
+    let { angleSpeed, moveSpeed } = jet;
+
+    if (score.current > 10) {
+      angleSpeed += score.current / 80;
+      moveSpeed += score.current / 40;
+    }
+
     const destinationAngle = calculateDestinationAngle(jet.point, anglePoint) + Math.PI / 2;
-    jet.rotation = animateRotation(jet.rotation, destinationAngle, jet.rotateDirection, jet.angleSpeed, delta, () => {
+    jet.rotation = animateRotation(jet.rotation, destinationAngle, jet.rotateDirection, angleSpeed, delta, () => {
       jet.rotateDirection = RotateDirection.NONE;
       if (attackPoint) {
         fire(attackPoint);
@@ -89,7 +97,7 @@ const jetController = ({ app, emitter }: Engine) => {
       }
     });
     if (destinationPoint) {
-      jet.point = moveByAngleToPoint(jet.point, destinationPoint, jet.rotation - Math.PI / 2, jet.moveSpeed, delta);
+      jet.point = moveByAngleToPoint(jet.point, destinationPoint, jet.rotation - Math.PI / 2, moveSpeed, delta);
     }
   });
 

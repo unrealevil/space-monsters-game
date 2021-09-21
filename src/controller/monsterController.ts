@@ -58,7 +58,7 @@ const monsterController = ({ app }: Engine) => {
     monsterContainer.addChild(monster.sprite);
     monsters.push({
       sprite: monster.sprite,
-      speed: score.current > 10 ? 1 + score.current / 20 : 1,
+      speed: score.current > 10 ? 1 + score.current / 30 : 1,
     });
   };
   spawnMonsters();
