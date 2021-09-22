@@ -7,7 +7,7 @@ import { createExplosion } from '../gameObjects/explosion';
 import jetController from '../controller/jetController';
 import rayController from '../controller/rayController';
 import monsterController from '../controller/monsterController';
-import { appendScore } from '../gameObjects/score';
+import { createScoreCaption } from '../gameObjects/scoreCaption';
 import { score } from '../score';
 
 const gameStage = ({ app, emitter }: Engine) => {
@@ -19,7 +19,10 @@ const gameStage = ({ app, emitter }: Engine) => {
 
   app.stage.addChild(bg);
   app.stage.addChild(explosionContainer);
-  const scoreCaption = appendScore(app);
+  const scoreCaption = createScoreCaption(app.ticker, () => score.gameScore);
+  scoreCaption.x = app.screen.width - 10;
+  scoreCaption.y = 5;
+  app.stage.addChild(scoreCaption);
 
   const jet = jetController({ app, emitter });
   const rays = rayController({ app, emitter });

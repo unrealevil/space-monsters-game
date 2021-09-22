@@ -16,9 +16,7 @@ export const score = {
   },
 
   get highScore() {
-    if (!this.currentHighScore) {
-      return '-';
-    }
-    return String(this.currentHighScore);
+    const score = this.currentHighScore ? String(this.currentHighScore) : '-';
+    return `High Score: ${score}`;
   },
 };

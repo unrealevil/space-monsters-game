@@ -4,7 +4,8 @@ import { Container } from '@pixi/display';
 import { Engine } from '../engine';
 import { createStarWrap } from '../gameObjects/starWarp';
 import { createButton, createHeader, createSimpleText } from '../ui';
-import { appendHighScore } from '../gameObjects/score';
+import { createScoreCaption } from '../gameObjects/scoreCaption';
+import { score } from '../score';
 
 const menuStage = ({ app, emitter }: Engine) => {
   app.stage.removeAllListeners();
@@ -26,7 +27,7 @@ const menuStage = ({ app, emitter }: Engine) => {
     setTimeout(() => {
       gameTitle.destroy();
       copyright.destroy();
-      highScore.destroy();
+      highScoreCaption.destroy();
     }, 1000);
   });
   app.stage.addChild(button);
@@ -36,7 +37,10 @@ const menuStage = ({ app, emitter }: Engine) => {
   copyright.y = app.screen.height - 50;
   app.stage.addChild(copyright);
 
-  const highScore = appendHighScore(app);
+  const highScoreCaption = createScoreCaption(app.ticker, () => score.highScore);
+  highScoreCaption.x = app.screen.width - 10;
+  highScoreCaption.y = 5;
+  app.stage.addChild(highScoreCaption);
 };
 
 const createCopyright = (gitHubLogo: Sprite, pixiLogo: Sprite) => {
