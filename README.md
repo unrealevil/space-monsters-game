@@ -4,7 +4,7 @@ Fun game created on [PixiJS](https://pixijs.com/)
 ## Demo
 https://space-monsters.herokuapp.com/
 
-### Screen shoots
+### Screenshots
 
 ![screenshot-1](doc/screen-shoot1.png)
 ![screenshot-2](doc/screen-shoot2.png)
